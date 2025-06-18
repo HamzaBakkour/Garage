@@ -98,7 +98,6 @@ internal class Main
                 return;
             }
 
-
             Vehicle vehicle = _createVehicle.Create(_ui, _garageHandler.ListAll());
             bool success = _garageHandler.Park(vehicle);
 
@@ -188,55 +187,57 @@ internal class Main
 
     public void FindAllByFuelType()
     {
-        try
+        _ui.Print("Fuel Type (1=Gasoline, 2=Diesel):");
+        string inputStr = _ui.GetInput();
+
+        if (!int.TryParse(inputStr, out int input) ||
+            input < 1 || input > Enum.GetValues(typeof(FuelType)).Length)
         {
-            _ui.Print("Fuel Type (1=Gasoline, 2=Diesel):");
-            FuelType fuel = (FuelType)int.Parse(_ui.GetInput());
-            var vehicles = _garageHandler.FindAllByFuelType(fuel);
-
-            if (vehicles.Count == 0)
-            {
-                _ui.Print($"No vehicles with fuel type {fuel} found");
-                return;
-            }
-
-            foreach (var vehicle in vehicles)
-            {
-                _ui.Print(vehicle.ToString());
-            }
+            _ui.Print("Invalid fuel type. Please enter 1 or 2.");
+            return;
         }
-        catch (Exception ex)
+
+        FuelType fuel = (FuelType)(input - 1);
+
+        var vehicles = _garageHandler.FindAllByFuelType(fuel);
+
+        if (vehicles.Count == 0)
         {
-            _ui.Print($"Error: {ex.Message}");
+            _ui.Print($"No vehicles with fuel type {fuel} found.");
+            return;
+        }
+
+        foreach (var vehicle in vehicles)
+        {
+            _ui.Print(vehicle.ToString());
         }
     }
 
     private void FindAllByColorAndNumberOfSeats()
     {
-        try
+        _ui.Print("Color:");
+        string color = _ui.GetInput();
+
+        _ui.Print("Number of Seats:");
+        string seatInput = _ui.GetInput();
+
+        if (!uint.TryParse(seatInput, out uint seats))
         {
-            _ui.Print("Color:");
-            string color = _ui.GetInput();
-            _ui.Print("Number of Seats:");
-            uint seats = uint.Parse(_ui.GetInput());
-            var vehicles = _garageHandler.FindAllByColorAndNumberOfSeats(color, seats);
-
-            if (vehicles.Count == 0)
-            {
-                _ui.Print($"No vehicles with fuel color {color} and" +
-                    $" number of seats {seats} found");
-                return;
-            }
-
-            foreach (var vehicle in vehicles)
-            {
-                _ui.Print(vehicle.ToString());
-            }
-
+            _ui.Print("Invalid number of seats. Please enter a non-negative integer.");
+            return;
         }
-        catch (Exception ex)
+
+        var vehicles = _garageHandler.FindAllByColorAndNumberOfSeats(color, seats);
+
+        if (vehicles.Count == 0)
         {
-            _ui.Print($"Error: {ex.Message}");
+            _ui.Print($"No vehicles with color {color} and number of seats {seats} found.");
+            return;
+        }
+
+        foreach (var vehicle in vehicles)
+        {
+            _ui.Print(vehicle.ToString());
         }
 
     }
