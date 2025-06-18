@@ -75,7 +75,7 @@ internal class Main
         _ui.Print("1. Park Vehicle");
         _ui.Print("2. Vehicle Leave");
         _ui.Print("3. List All Parked Vehicles");
-        _ui.Print("4. List All Parked Vehicles (Detailed)");
+        _ui.Print("4. List All Parked Vehicles (Count)");
         _ui.Print("5. Find Vehicle Using RegstrationNO");
         _ui.Print("6. Find All Vehicles by Color");
         _ui.Print("7. Find All Vehicles by Fuel Type");
