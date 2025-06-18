@@ -54,6 +54,9 @@ internal class Main
                 case "8":
                     FindAllByColorAndNumberOfSeats();
                     break;
+                case "9":
+                    Environment.Exit(0);
+                    break;
             }
 
         }while (true);
