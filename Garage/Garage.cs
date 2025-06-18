@@ -10,6 +10,9 @@ public class Garage<T>: IEnumerable<T> where T: Vehicle
     private int FindFirstEmptySlot() =>
         Array.IndexOf(_vehicles, null);
 
+    public bool IsFull() =>
+        FindFirstEmptySlot() == -1;
+
     private bool IsVehicleParked(string registrationNO) => 
                     _vehicles.Any(v => v != null && v.RegistrationNO == registrationNO);
 

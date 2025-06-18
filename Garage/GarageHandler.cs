@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,8 @@ internal class GarageHandler<T> : IGarageHandler<T> where T : Vehicle
         _garage = new Garage<T>(capacity, vehicles);
     }
 
+    public bool IsFull() =>
+        _garage.IsFull();
 
     public bool Park(T vehicle) =>
                             _garage.Park(vehicle);

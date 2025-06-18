@@ -4,6 +4,9 @@ namespace Garage;
 
 public interface IGarageHandler<T> where T : Vehicle
 {
+
+    bool IsFull();
+
     bool Park(T vehicle);
 
     bool Leave(string registrationNO);

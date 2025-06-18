@@ -82,6 +82,13 @@ internal class Main
     {
         try
         {
+
+            if (_garageHandler.IsFull()) { 
+                _ui.Print("The garage is full.");
+                return;
+            }
+            
+
             Vehicle vehicle = _createVehicle.Create(_ui);
             bool success = _garageHandler.Park(vehicle);
 
