@@ -172,41 +172,57 @@ internal class Main
 
     public void FindAllByFuelType()
     {
-        _ui.Print("Fuel Type (1=Gasoline, 2=Diesel):");
-        FuelType fuel = (FuelType)int.Parse(_ui.GetInput());
-        var vehicles = _garageHandler.FindAllByFuelType(fuel);
-
-        if (vehicles.Count == 0)
+        try
         {
-            _ui.Print($"No vehicles with fuel type {fuel} found");
-            return;
+            _ui.Print("Fuel Type (1=Gasoline, 2=Diesel):");
+            FuelType fuel = (FuelType)int.Parse(_ui.GetInput());
+            var vehicles = _garageHandler.FindAllByFuelType(fuel);
+
+            if (vehicles.Count == 0)
+            {
+                _ui.Print($"No vehicles with fuel type {fuel} found");
+                return;
+            }
+
+            foreach (var vehicle in vehicles)
+            {
+                _ui.Print(vehicle.ToString());
+            }
         }
-
-        foreach (var vehicle in vehicles)
+        catch (Exception ex)
         {
-            _ui.Print(vehicle.ToString());
+            _ui.Print($"Error: {ex.Message}");
         }
     }
 
     private void FindAllByColorAndNumberOfSeats()
     {
-        _ui.Print("Color:");
-        string color = _ui.GetInput();
-        _ui.Print("Number of Seats:");
-        uint seats = uint.Parse(_ui.GetInput());
-        var vehicles = _garageHandler.FindAllByColorAndNumberOfSeats(color, seats);
-
-        if (vehicles.Count == 0)
+        try
         {
-            _ui.Print($"No vehicles with fuel color {color} and" +
-                $" number of seats {seats} found");
-            return;
+            _ui.Print("Color:");
+            string color = _ui.GetInput();
+            _ui.Print("Number of Seats:");
+            uint seats = uint.Parse(_ui.GetInput());
+            var vehicles = _garageHandler.FindAllByColorAndNumberOfSeats(color, seats);
+
+            if (vehicles.Count == 0)
+            {
+                _ui.Print($"No vehicles with fuel color {color} and" +
+                    $" number of seats {seats} found");
+                return;
+            }
+
+            foreach (var vehicle in vehicles)
+            {
+                _ui.Print(vehicle.ToString());
+            }
+
+        }
+        catch (Exception ex)
+        {
+            _ui.Print($"Error: {ex.Message}");
         }
 
-        foreach (var vehicle in vehicles)
-        {
-            _ui.Print(vehicle.ToString());
-        }
     }
 
 }
