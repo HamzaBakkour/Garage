@@ -16,6 +16,11 @@ internal class Main
     private ICreateVehicle _createVehicle;
     private IUI _ui;
 
+    private List<string> ListAllAsStrings() =>
+                                    _garageHandler.ListAll()
+                                   .Select(v => v.ToString())
+                                   .ToList();
+
     public Main(IGarageHandler<Vehicle> garageHandler, ICreateVehicle createVehicle, IUI ui)
     {
         this._garageHandler = garageHandler;
@@ -78,6 +83,10 @@ internal class Main
         _ui.Print("9. Exit");
     }
 
+
+
+
+
     public void ParkVehicle()
     {
         try
@@ -90,7 +99,7 @@ internal class Main
             }
 
 
-            Vehicle vehicle = _createVehicle.Create(_ui);
+            Vehicle vehicle = _createVehicle.Create(_ui, _garageHandler.ListAll());
             bool success = _garageHandler.Park(vehicle);
 
             if (success)
