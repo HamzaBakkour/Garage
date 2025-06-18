@@ -31,7 +31,6 @@ public abstract class Vehicle
     }
 
 
-    //TODO: print insted of throwing
     public string RegistrationNO
     {
         get => _registrationNO;
@@ -51,7 +50,6 @@ public abstract class Vehicle
     }
 
 
-    //TODO: print insted of throwing
     public string Color
     {
         get => _color;
@@ -67,7 +65,6 @@ public abstract class Vehicle
     public uint NumberOfEngines { get; set;}
     public uint CylinderVolum { get; set;}
 
-    //TODO: print insted of throwing
     public FuelType FuelType {
         get => _fuelType;
         set {
