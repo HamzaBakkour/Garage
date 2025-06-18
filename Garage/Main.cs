@@ -13,11 +13,13 @@ internal class Main
 {
 
     private IGarageHandler<Vehicle> _garageHandler;
+    private ICreateVehicle _createVehicle;
     private IUI _ui;
 
-    public Main(IGarageHandler<Vehicle> garageHandler, IUI ui)
+    public Main(IGarageHandler<Vehicle> garageHandler, ICreateVehicle createVehicle, IUI ui)
     {
         this._garageHandler = garageHandler;
+        this._createVehicle = createVehicle;
         this._ui = ui;
     }
 
@@ -78,17 +80,42 @@ internal class Main
 
     public void ParkVehicle()
     {
-        if (_garageHandler.IsFull())
+        try
         {
-            _ui.Print("The garage is full.");
-            return;
+
+            if (_garageHandler.IsFull())
+            {
+                _ui.Print("The garage is full.");
+                return;
+            }
+
+
+            Vehicle vehicle = _createVehicle.Create(_ui);
+            bool success = _garageHandler.Park(vehicle);
+
+            if (success)
+                _ui.Print("Vehicle parked successfully.");
+            else
+                _ui.Print("Could not park the vehicle. Garage is either full" +
+                            " or it already has this vehicle parked");
         }
-        _garageHandler.Park();
+        catch (ArgumentException ex)
+        {
+            _ui.Print($"Error: {ex.Message}");
+        }
     }
 
     public void LeaveVehicle()
     {
-        _garageHandler.Leave();
+        _ui.Print("RegistrationNO:");
+        string regNo = _ui.GetInput();
+        bool success = _garageHandler.Leave(regNo.ToUpper());
+
+        if (success)
+            _ui.Print("Vehicle leaved");
+        else
+            _ui.Print("No vehicle with regstration number" +
+                        $" {regNo} exist");
     }
 
     public void ListAll()

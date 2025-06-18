@@ -73,31 +73,7 @@ public class Garage<T>: IEnumerable<T> where T: Vehicle
                                 .Where(v => v != null)
                                 .ToList();
    
-    public Dictionary<VehicleType,  int> ListAllDetailed() =>
-                                _vehicles
-                                .Where(v => v != null)
-                                .GroupBy(v => v.VehicleType)
-                                .ToDictionary(g => g.Key, g => g.Count());
-    
-    public T? FindByRegstrationNO(string regstrationNO) => 
-                                _vehicles
-                                .Where(v => v != null && v.RegistrationNO == regstrationNO)
-                                .FirstOrDefault();
 
-    public List<T> FindAllByColor(string color) => 
-                                _vehicles
-                                .Where(v => v != null && v.Color == color)
-                                .ToList();
-
-    public List<T> FindAllByFuelType(FuelType fuelType) => 
-                                _vehicles
-                                .Where(v => v != null && v.FuelType == fuelType)
-                                .ToList();
-   
-    public List<T> FindAllByColorAndNumberOfSeats(string color, uint numberOfSeats) =>
-                                _vehicles
-                                .Where(v => v != null && v.Color == color && v.NumberOfSeats == numberOfSeats)
-                                .ToList();
 
     public IEnumerator<T> GetEnumerator()
     {

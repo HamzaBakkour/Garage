@@ -23,10 +23,10 @@ internal class Program
 
         IUI ui = new ConsoleUI();
 
-        IGarageHandler<Vehicle> garageHandler = new GarageHandler<Vehicle>(15, initialVehicles, createVehicle, ui);
+        IGarageHandler<Vehicle> garageHandler = new GarageHandler<Vehicle>(15, initialVehicles, ui);
 
 
-        Main main = new Main(garageHandler, ui);
+        Main main = new Main(garageHandler, createVehicle, ui);
 
         main.Run();
     }
