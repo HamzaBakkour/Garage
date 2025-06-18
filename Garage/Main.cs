@@ -13,14 +13,12 @@ internal class Main
 {
 
     private IGarageHandler<Vehicle> _garageHandler;
-    private ICreateVehicle _createVehicle;
     private IUI _ui;
 
-    public Main(IGarageHandler<Vehicle> garageHandler, ICreateVehicle createVehicle, IUI ui)
+    public Main(IGarageHandler<Vehicle> garageHandler, IUI ui)
     {
         this._garageHandler = garageHandler;
         this._ui = ui;
-        this._createVehicle = createVehicle;
     }
 
     public void Run() {
@@ -80,42 +78,17 @@ internal class Main
 
     public void ParkVehicle()
     {
-        try
+        if (_garageHandler.IsFull())
         {
-
-            if (_garageHandler.IsFull()) { 
-                _ui.Print("The garage is full.");
-                return;
-            }
-            
-
-            Vehicle vehicle = _createVehicle.Create(_ui);
-            bool success = _garageHandler.Park(vehicle);
-
-            if (success)
-                _ui.Print("Vehicle parked successfully.");
-            else
-                _ui.Print("Could not park the vehicle. Garage is either full"+
-                            " or it already has this vehicle parked");
+            _ui.Print("The garage is full.");
+            return;
         }
-        catch (ArgumentException ex)
-        {
-            _ui.Print($"Error: {ex.Message}");
-        }
+        _garageHandler.Park();
     }
 
     public void LeaveVehicle()
     {
-        _ui.Print("RegistrationNO:");
-        string regNo = _ui.GetInput();
-        bool success = _garageHandler.Leave(regNo.ToUpper());
-
-        if (success)
-            _ui.Print("Vehicle leaved");
-        else
-            _ui.Print("No vehicle with regstration number" +
-                        $" {regNo} exist");
-
+        _garageHandler.Leave();
     }
 
     public void ListAll()

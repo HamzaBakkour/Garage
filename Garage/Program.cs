@@ -17,14 +17,16 @@ internal class Program
 
         };
 
+        ICreateVehicle createVehicle = new CreateVehicle();
 
-        IGarageHandler<Vehicle> garageHandler = new GarageHandler<Vehicle>(15, initialVehicles);
+
 
         IUI ui = new ConsoleUI();
 
-        ICreateVehicle createVehicle = new CreateVehicle();
+        IGarageHandler<Vehicle> garageHandler = new GarageHandler<Vehicle>(15, initialVehicles, createVehicle, ui);
 
-        Main main = new Main(garageHandler, createVehicle, ui);
+
+        Main main = new Main(garageHandler, ui);
 
         main.Run();
     }

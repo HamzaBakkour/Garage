@@ -6,10 +6,8 @@ public interface IGarageHandler<T> where T : Vehicle
 {
 
     bool IsFull();
-
-    bool Park(T vehicle);
-
-    bool Leave(string registrationNO);
+    void Park();
+    void Leave();
 
     T? FindByRegistrationNO(string registrationNO);
 
