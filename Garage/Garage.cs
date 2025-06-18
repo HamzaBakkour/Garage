@@ -7,13 +7,8 @@ public class Garage<T>: IEnumerable<T> where T: Vehicle
 {
     private T[] _vehicles;
 
-    private int FindFirstEmptySlot()
-    {
-        for (int i = 0; i < _vehicles.Length; i++)
-            if (_vehicles[i] == null)
-                return i;
-        return -1; // No empty slot found
-    }
+    private int FindFirstEmptySlot() =>
+        Array.IndexOf(_vehicles, null);
 
     private bool IsVehicleParked(string registrationNO) => 
                     _vehicles.Any(v => v != null && v.RegistrationNO == registrationNO);
