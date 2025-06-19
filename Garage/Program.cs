@@ -23,7 +23,7 @@ internal class Program
                             services.AddSingleton<IConfiguration>(config);
                             services.AddSingleton<IUI, ConsoleUI>();
                             services.AddSingleton<ICreateVehicle, CreateVehicle>();
-
+                            
                             services.AddSingleton<List<Vehicle>>(new List<Vehicle>
                             {
                                 new Car("abc1", "Red", 1, 122),
